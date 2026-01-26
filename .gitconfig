@@ -1,0 +1,38 @@
+[status]
+	showUntrackedFiles = all
+[core]
+	autocrlf = input
+	editor = nvim
+[user]
+	name = Rohan Gupta
+	email = rohangupta@quark.com
+[pull]
+	rebase = true  # Cleaner history
+	ff = only      # Fast-forward only (fail if not possible)
+[push]
+	default = simple
+	autoSetupRemote = true  # Auto-track new branches
+	followTags = true       # Push annotated tags automatically
+[fetch]
+	prune = true            # Remove deleted remote branches
+	prunetags = true        # Remove deleted remote tags
+[merge]
+	ff = false              # Always create merge commit
+	conflictstyle = diff3   # Show common ancestor in conflicts
+[init]
+	defaultBranch = main
+[rerere]
+	enabled = true  # Reuse recorded conflict resolutions
+[diff]
+	algorithm = histogram  # Better diff algorithm
+	colorMoved = zebra     # Highlight moved code
+[rebase]
+	autoStash = true       # Auto-stash before rebase
+	autoSquash = true      # Auto-squash fixup! commits
+[commit]
+	verbose = true         # Show diff in commit message editor
+	gpgsign = false         # Sign all commits with GPG
+[log]
+	date = relative        # Show relative dates
+[help]
+	autocorrect = 1        # Auto-correct typos after 0.1 seconds

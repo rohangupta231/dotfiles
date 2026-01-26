@@ -1,0 +1,22 @@
+# Dotfiles Repository
+
+# Backup directory
+.dotfiles_backup_*/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
