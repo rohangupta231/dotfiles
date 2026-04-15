@@ -1,75 +1,90 @@
 add_newline = false
 
 format = """
-$username\
-$hostname\
-$directory\
-$git_status\
-$nodejs\
-$python\
-$rust\
-$java\
-$golang\
-$cmd_duration\
-$status\
-$line_break\
-$character
-"""
+[╭─](bold #a6e3a1) $directory$git_branch$git_status$fill$cmd_duration$time
+[╰─](bold #a6e3a1) $java$nodejs$python$rust$golang$character"""
+
+[fill]
+symbol = "─"
+style = "#45475a"
 
 [character]
-success_symbol = "[❯](bold cyan)"
-error_symbol = "[❯](bold red)"
+success_symbol = "[❯](bold #89b4fa)"
+error_symbol = "[❯](bold #f38ba8)"
 
 [directory]
-style = "bold blue"
+style = "bold #89dceb"
 truncate_to_repo = true
-truncation_length = 3
+truncation_length = 4
+format = "[$path]($style)[$read_only]($read_only_style) "
+read_only = " 󰌾"
+read_only_style = "bold #f38ba8"
 
 [git_branch]
 symbol = " "
-style = "bold purple"
+style = "#cba6f7"
+format = "[$symbol$branch]($style) "
 
 [git_status]
-style = "bold yellow"
+format = '([$all_status$ahead_behind]($style) )'
+style = "#f9e2af"
+ahead = "↑${count}"
+behind = "↓${count}"
+diverged = "↕"
+modified = "✎"
+untracked = "✦"
+staged = "✚"
+deleted = "✖"
+renamed = "↪"
+stashed = "⚑"
+conflicted = "✗"
 
 [cmd_duration]
-min_time = 500
-style = "bold dimmed white"
+min_time = 2000
+style = "#6c7086"
+format = " [$duration]($style)"
+
+[time]
+disabled = false
+time_format = "%H:%M"
+style = "#6c7086"
+format = " [$time]($style)"
+
+[java]
+symbol = " "
+style = "#f38ba8"
+format = "[$symbol$version]($style) "
+
+[nodejs]
+symbol = " "
+style = "#a6e3a1"
+format = "[$symbol$version]($style) "
+
+[python]
+symbol = " "
+style = "#f9e2af"
+format = "[$symbol$version]($style) "
+
+[rust]
+symbol = " "
+style = "#fab387"
+format = "[$symbol$version]($style) "
+
+[golang]
+symbol = " "
+style = "#89dceb"
+format = "[$symbol$version]($style) "
+
+[package]
+disabled = true
+
+[os]
+disabled = true
 
 [username]
 show_always = false
 
 [hostname]
 ssh_only = true
-style = "dimmed white"
-
-[nodejs]
-symbol = " "
-style = "bold green"
-
-[python]
-symbol = " "
-style = "bold yellow"
-
-[rust]
-symbol = " "
-style = "bold red"
-
-[golang]
-symbol = " "
-style = "bold cyan"
-[java]
-symbol = " "
-style = "bold red"
-
-[status]
-disabled = false
-format = '[\[$symbol$status\]]($style) '
-symbol = "✖"
-style = "bold red"
-
-[time]
-disabled = false
-format = '[$time]($style) '
-time_format = "%H:%M"
-style = "dimmed white"
+style = "#6c7086"
+format = "[@$hostname]($style) "

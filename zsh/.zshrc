@@ -7,7 +7,7 @@ export COLORTERM="truecolor"
 export PAGER="batcat --style=plain"
 export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
 export EDITOR="code --wait"
-
+export CHROME_BIN=/snap/bin/chromium
 # =========================
 # History configuration
 # =========================
@@ -29,7 +29,7 @@ setopt AUTO_CD                # cd by typing directory name
 setopt AUTO_PUSHD             # Push directories onto stack
 setopt PUSHD_IGNORE_DUPS      # Don't push duplicates
 setopt PUSHD_SILENT           # Don't print directory stack
-setopt CORRECT                # Suggest corrections for commands
+# setopt CORRECT                # Suggest corrections for commands
 setopt INTERACTIVE_COMMENTS   # Allow comments in interactive shell
 setopt NO_BEEP                # Disable beep on errors
 setopt EXTENDED_GLOB          # Extended globbing patterns
@@ -99,7 +99,8 @@ export KUBECONFIG=$(echo ~/kube/kubeconfigs/* | tr ' ' ':')
 # =========================
 # fnm (Node version manager)
 # =========================
-FNM_PATH="$HOME/.local/share/fnm"
+export FNM_DIR="$HOME/.local/share/fnm"
+FNM_PATH="$FNM_DIR"
 if [ -d "$FNM_PATH" ]; then
   export PATH="$FNM_PATH:$PATH"
   eval "$(fnm env)"
@@ -109,7 +110,7 @@ fi
 # Aliases
 # =========================
 alias cat='batcat'
-alias zshconfig='nvim ~/.zshrc'
+alias zshconfig='code ~/.zshrc'
 alias reloadzsh='source ~/.zshrc'
 alias ls="eza --all --icons=always"
 
@@ -135,6 +136,7 @@ alias kgp='kubectl get pods'
 alias kgd='kubectl get deployments'
 alias kgs='kubectl get svc'
 alias kgn='kubectl get nodes'
+
 alias kdp='kubectl describe pod'
 alias kdd='kubectl describe deployment'
 alias kds='kubectl describe svc'
