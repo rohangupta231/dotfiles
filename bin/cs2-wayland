@@ -20,7 +20,7 @@ import time
 
 APP_ID = "730"
 FLAG = "SDL_VIDEO_DRIVER=wayland"
-DEFAULT_ON = f"{FLAG} %command% -fullscreen +fps_max 0"
+DEFAULT_ON = f"{FLAG} %command% +fps_max 0"
 CONFIGS = glob.glob(os.path.expanduser("~/.steam/steam/userdata/*/config/localconfig.vdf"))
 
 
