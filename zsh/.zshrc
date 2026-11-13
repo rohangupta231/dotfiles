@@ -94,7 +94,9 @@ kubectl() {
   command kubectl "$@"
 }
 
-export KUBECONFIG=$(echo ~/kube/kubeconfigs/* | tr ' ' ':')
+if [[ -d ~/kube/kubeconfigs ]] && [[ -n ~/kube/kubeconfigs/*(#qN) ]]; then
+  export KUBECONFIG=$(echo ~/kube/kubeconfigs/* | tr ' ' ':')
+fi
 
 # =========================
 # fnm (Node version manager)

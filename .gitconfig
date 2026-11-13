@@ -2,10 +2,10 @@
 	showUntrackedFiles = all
 [core]
 	autocrlf = input
-	editor = nvim
+	editor = code --wait
 [user]
 	name = Rohan Gupta
-	email = rohangupta@quark.com
+	email = rohan.codespace@gmail.com
 [pull]
 	rebase = true  # Cleaner history
 	ff = only      # Fast-forward only (fail if not possible)
