@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+# theme — switch the terminal color theme with one command.
+#
+# Each theme is a kitty color file in <dotfiles>/themes/<name>.conf.
+# Switching re-points ~/.config/kitty/current-theme.conf at that file and
+# live-reloads every running kitty window. The starship prompt and the
+# ccstatusline status bar use ANSI color names, so they follow automatically.
+#
+# Add a theme: drop a new <name>.conf into the themes/ folder.
+
+set -euo pipefail
+
+DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dev/personal/dotfiles}"
+THEMES_DIR="$DOTFILES_DIR/themes"
+LINK="$HOME/.config/kitty/current-theme.conf"
+
+names() {
+    for f in "$THEMES_DIR"/*.conf; do basename "$f" .conf; done
+}
+
+current() {
+    if [ -L "$LINK" ]; then basename "$(readlink "$LINK")" .conf; fi
+}
+
+list() {
+    local cur; cur="$(current)"
+    for n in $(names); do
+        title="$(head -1 "$THEMES_DIR/$n.conf" | sed 's/^# *//')"
+        if [ "$n" = "$cur" ]; then
+            printf '* %-14s %s\n' "$n" "$title"
+        else
+            printf '  %-14s %s\n' "$n" "$title"
+        fi
+    done
+}
+
+usage() {
+    cat <<EOF
+Usage: theme [name]
+
+  theme              List themes (* = current)
+  theme <name>       Switch to <name>
+  theme --current    Print the current theme
+  theme --help       Show this help
+
+Themes live in $THEMES_DIR
+EOF
+}
+
+case "${1:-}" in
+    ""|-l|--list|list) list ;;
+    --names)           names ;;
+    -c|--current)      current ;;
+    -h|--help|help)    usage ;;
+    *)
+        name="$1"
+        file="$THEMES_DIR/$name.conf"
+        if [ ! -f "$file" ]; then
+            echo "theme: unknown theme '$name'. Available:" >&2
+            list >&2
+            exit 1
+        fi
+        mkdir -p "$(dirname "$LINK")"
+        ln -sfn "$file" "$LINK"
+        # kitty reloads its config on SIGUSR1
+        pkill -USR1 -x kitty 2>/dev/null || true
+        echo "Theme set to $name"
+        ;;
+esac

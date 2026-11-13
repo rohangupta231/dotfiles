@@ -274,6 +274,14 @@ for pair in "config/ccstatusline/settings.json:$HOME/.config/ccstatusline/settin
     print_success "Linked $dst"
 done
 
+# Theme switcher (`theme <name>`), default theme on first install
+mkdir -p ~/.local/bin
+ln -sfn "$DOTFILES_DIR/bin/theme" ~/.local/bin/theme
+if [ ! -L ~/.config/kitty/current-theme.conf ]; then
+    DOTFILES_DIR="$DOTFILES_DIR" "$DOTFILES_DIR/bin/theme" github-dark
+fi
+print_success "Installed theme switcher (current: $(DOTFILES_DIR="$DOTFILES_DIR" "$DOTFILES_DIR/bin/theme" --current))"
+
 # Set Zsh as default shell
 if [ "$SHELL" != "$(which zsh)" ]; then
     print_info "Setting Zsh as default shell..."

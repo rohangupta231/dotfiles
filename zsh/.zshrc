@@ -156,6 +156,10 @@ alias klf='stern --tail 50 --since 5m'
 alias kl='stern'
 alias klall='stern . --all-namespaces'
 
+# Theme switcher: `theme` lists, `theme <TAB>` completes names
+_theme() { compadd $(theme --names 2>/dev/null) }
+compdef _theme theme
+
 # Initialize zoxide (better cd)
 eval "$(zoxide init zsh)"
 

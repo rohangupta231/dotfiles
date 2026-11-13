@@ -48,6 +48,31 @@ Personal development environment configuration for quick setup on any Linux mach
 - `rgnot` → NOT logic
 - `rgg` → search hidden files
 
+## 🎨 Themes
+
+One command switches the whole terminal look — kitty, the starship prompt and
+the Claude Code status line (ccstatusline):
+
+```bash
+theme                 # list themes (* = current)
+theme tokyo-night     # switch; open kitty windows update instantly
+theme <TAB>           # tab-completes theme names
+```
+
+| Theme | Name |
+|---|---|
+| GitHub Dark (default) | `github-dark` |
+| Tokyo Night | `tokyo-night` |
+| Ayu Dark | `ayu-dark` |
+
+**How it works:** each theme is a kitty color file in `themes/<name>.conf`.
+`theme` points `~/.config/kitty/current-theme.conf` at it and reloads kitty.
+Starship and ccstatusline use ANSI color names (`blue`, `green`, …) instead of
+hex codes, so they pick up the new palette automatically.
+
+**Add a theme:** copy one of the files in `themes/`, change the colors, save it
+as `themes/<new-name>.conf` — it shows up in `theme` right away.
+
 ## 🛠️ Quick Install
 
 ```bash
