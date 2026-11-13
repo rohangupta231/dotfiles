@@ -1,33 +1,33 @@
 add_newline = false
 
 format = """
-[╭─](bold #d97757) $directory$git_branch$git_status$fill$cmd_duration$time
-[╰─](bold #d97757) $java$nodejs$python$rust$golang$character"""
+[╭─](bold #58a6ff) $directory$git_branch$git_status$fill$cmd_duration$time
+[╰─](bold #58a6ff) $java$nodejs$python$rust$golang$character"""
 
 [fill]
 symbol = "─"
-style = "#3a3734"
+style = "#30363d"
 
 [character]
-success_symbol = "[❯](bold #d97757)"
-error_symbol = "[❯](bold #ff6b80)"
+success_symbol = "[❯](bold #3fb950)"
+error_symbol = "[❯](bold #ff7b72)"
 
 [directory]
-style = "bold #f0eee6"
+style = "bold #79c0ff"
 truncate_to_repo = true
 truncation_length = 4
 format = "[$path]($style)[$read_only]($read_only_style) "
 read_only = " 󰌾"
-read_only_style = "bold #ff6b80"
+read_only_style = "bold #ff7b72"
 
 [git_branch]
 symbol = " "
-style = "#b1b9f9"
+style = "#d2a8ff"
 format = "[$symbol$branch]($style) "
 
 [git_status]
 format = '([$all_status$ahead_behind]($style) )'
-style = "#ffc107"
+style = "#d29922"
 ahead = "↑${count}"
 behind = "↓${count}"
 diverged = "↕"
@@ -41,38 +41,38 @@ conflicted = "✗"
 
 [cmd_duration]
 min_time = 2000
-style = "#8a8580"
+style = "#8b949e"
 format = " [$duration]($style)"
 
 [time]
 disabled = false
 time_format = "%H:%M"
-style = "#8a8580"
+style = "#8b949e"
 format = " [$time]($style)"
 
 [java]
 symbol = " "
-style = "#ff6b80"
+style = "#ff7b72"
 format = "[$symbol$version]($style) "
 
 [nodejs]
 symbol = " "
-style = "#4eba65"
+style = "#3fb950"
 format = "[$symbol$version]($style) "
 
 [python]
 symbol = " "
-style = "#ffc107"
+style = "#e3b341"
 format = "[$symbol$version]($style) "
 
 [rust]
 symbol = " "
-style = "#e8a07f"
+style = "#ffa657"
 format = "[$symbol$version]($style) "
 
 [golang]
 symbol = " "
-style = "#48968c"
+style = "#39c5cf"
 format = "[$symbol$version]($style) "
 
 [package]
@@ -86,5 +86,5 @@ show_always = false
 
 [hostname]
 ssh_only = true
-style = "#8a8580"
+style = "#8b949e"
 format = "[@$hostname]($style) "

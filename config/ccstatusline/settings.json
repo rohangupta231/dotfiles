@@ -7,42 +7,42 @@
         "type": "model",
         "rawValue": true,
         "bold": true,
-        "color": "hex:d97757"
+        "color": "hex:58a6ff"
       },
       {
         "id": "2",
         "type": "separator",
         "character": "|",
-        "color": "hex:6b6661"
+        "color": "hex:6e7681"
       },
       {
         "id": "3",
         "type": "session-cost",
         "bold": true,
-        "color": "hex:e8a07f",
+        "color": "hex:ff7b72",
         "rawValue": true
       },
       {
         "id": "2",
         "type": "separator",
         "character": "|",
-        "color": "hex:6b6661"
+        "color": "hex:6e7681"
       },
       {
         "id": "5",
         "type": "context-percentage",
-        "color": "hex:ffc107"
+        "color": "hex:d29922"
       },
       {
         "id": "6",
         "type": "separator",
         "character": "|",
-        "color": "hex:6b6661"
+        "color": "hex:6e7681"
       },
       {
         "id": "14",
         "type": "session-clock",
-        "color": "hex:4eba65"
+        "color": "hex:3fb950"
       },
       {
         "id": "f1",
@@ -51,19 +51,19 @@
       {
         "id": "9",
         "type": "thinking-effort",
-        "color": "hex:af87ff"
+        "color": "hex:bc8cff"
       },
       {
         "id": "6",
         "type": "separator",
         "character": "|",
-        "color": "hex:6b6661"
+        "color": "hex:6e7681"
       },
       {
         "id": "15",
         "type": "context-bar",
         "rawValue": true,
-        "color": "hex:4eba65"
+        "color": "hex:3fb950"
       }
     ],
     [],
