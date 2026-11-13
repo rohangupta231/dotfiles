@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Brave
+Comment=Open Brave at login
+TryExec=/snap/bin/brave
+Exec=/snap/bin/brave
+Icon=brave
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=3
+NoDisplay=true

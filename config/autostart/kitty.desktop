@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=kitty
+Comment=Open kitty at login
+Exec=sh -c "\\$HOME/.local/kitty.app/bin/kitty"
+Icon=kitty
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=2
+NoDisplay=true

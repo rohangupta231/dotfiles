@@ -282,6 +282,22 @@ if [ ! -L ~/.config/kitty/current-theme.conf ]; then
 fi
 print_success "Installed theme switcher (current: $(DOTFILES_DIR="$DOTFILES_DIR" "$DOTFILES_DIR/bin/theme" --current))"
 
+# Apps opened at login (kitty, Brave)
+mkdir -p ~/.config/autostart
+for f in "$DOTFILES_DIR"/config/autostart/*.desktop; do
+    ln -sfn "$f" ~/.config/autostart/"$(basename "$f")"
+done
+print_success "Linked login apps: $(ls "$DOTFILES_DIR"/config/autostart | sed 's/\.desktop//' | tr '\n' ' ')"
+
+# kitty as the default terminal (Ctrl+Alt+T, "Open in Terminal", x-terminal-emulator)
+if [ "$PKG_MANAGER" = "apt" ] && [ -x ~/.local/kitty.app/bin/kitty ]; then
+    echo "kitty.desktop" > ~/.config/xdg-terminals.list
+    gsettings set org.gnome.desktop.default-applications.terminal exec 'kitty' 2>/dev/null || true
+    sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator "$HOME/.local/kitty.app/bin/kitty" 60
+    sudo update-alternatives --set x-terminal-emulator "$HOME/.local/kitty.app/bin/kitty"
+    print_success "kitty set as default terminal"
+fi
+
 # Set Zsh as default shell
 if [ "$SHELL" != "$(which zsh)" ]; then
     print_info "Setting Zsh as default shell..."
