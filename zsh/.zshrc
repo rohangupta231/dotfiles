@@ -115,6 +115,7 @@ alias cat='batcat'
 alias zshconfig='code ~/.zshrc'
 alias reloadzsh='source ~/.zshrc'
 alias ls="eza --all --icons=always"
+alias cs2wl='cs2-wayland toggle'                   # CS2 native Wayland on/off (cs2-wayland status)
 
 # Ripgrep aliases
 alias grep='rg'

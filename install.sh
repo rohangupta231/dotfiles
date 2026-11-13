@@ -282,6 +282,10 @@ if [ ! -L ~/.config/kitty/current-theme.conf ]; then
 fi
 print_success "Installed theme switcher (current: $(DOTFILES_DIR="$DOTFILES_DIR" "$DOTFILES_DIR/bin/theme" --current))"
 
+# CS2 Wayland toggle (`cs2-wayland on|off|toggle|status`, alias cs2wl)
+ln -sfn "$DOTFILES_DIR/bin/cs2-wayland" ~/.local/bin/cs2-wayland
+print_success "Installed cs2-wayland"
+
 # Apps opened at login (kitty, Brave)
 mkdir -p ~/.config/autostart
 for f in "$DOTFILES_DIR"/config/autostart/*.desktop; do
