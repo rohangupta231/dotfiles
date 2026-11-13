@@ -140,7 +140,7 @@ Ctrl+Delete            # Delete word forward
 Up/Down                # History search (context-aware)
 ```
 
-## WezTerm Shortcuts
+## kitty Shortcuts
 
 ### Panes
 ```bash
@@ -153,8 +153,10 @@ Ctrl+Shift+W           # Close pane (with confirmation)
 ### Utility
 ```bash
 Ctrl+Shift+K           # Clear scrollback
-Ctrl+Shift+F           # Search in terminal
-Right-click            # Show kubectl context menu (on kube context in status bar)
+Ctrl+Shift+F           # Search scrollback (fzf)
+Ctrl+Shift+Z           # Zoom current pane (toggle)
+Ctrl+Shift+T           # New tab in current directory
+Ctrl+Shift+F5          # Reload kitty config
 ```
 
 ## Kubernetes Quick Tips
@@ -166,8 +168,8 @@ klogs api              # Much easier than kubectl logs -f
 
 ### Switch contexts quickly
 ```bash
-# In WezTerm: Right-click on kube context in status bar
-# Or use: kcuc context-name
+kcgc                   # List contexts
+kcuc context-name      # Switch context
 ```
 
 ### Exec into pod
@@ -194,8 +196,8 @@ kpf pod/name 3000:3000 # Forward pod port
 
 ### Switch Environments
 ```bash
-1. Right-click kube context in WezTerm status bar
-2. Select new context
+1. kcgc                     # List contexts
+2. kcuc new-context         # Switch
 3. kctx                     # Verify
 4. kgp                      # Check resources
 ```

@@ -5,7 +5,6 @@
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dev/personal/dotfiles}"
 
 cp ~/.zshrc $DOTFILES_DIR/zsh/.zshrc
-cp ~/.config/wezterm/wezterm.lua $DOTFILES_DIR/config/wezterm/
 cp ~/.config/starship.toml $DOTFILES_DIR/config/starship/ 2>/dev/null || true
 cp ~/.gitconfig $DOTFILES_DIR/.gitconfig 2>/dev/null || true
 

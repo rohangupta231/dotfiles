@@ -4,7 +4,7 @@ Personal development environment configuration for quick setup on any Linux mach
 
 ## 📦 What's Included
 
-- **WezTerm** - Modern terminal emulator with custom status bar
+- **kitty** - GPU-accelerated terminal (Tokyo Night, Terminator-style splits)
 - **Zsh** - Shell configuration with plugins and aliases
 - **Starship** - Cross-shell prompt
 - **Git** - Git configuration
@@ -18,12 +18,11 @@ Personal development environment configuration for quick setup on any Linux mach
 
 ## ✨ Features
 
-### WezTerm Status Bar
-- Hostname & Time (left)
-- Git branch (right)
-- Kubernetes context & namespace with right-click switcher (right)
-- Docker container health status (right)
-- Terminator-style pane splitting
+### kitty Terminal
+- Tokyo Night colors, FiraCode Nerd Font
+- Tab bar at the bottom
+- Terminator-style pane splitting (`Ctrl+Shift+O` / `Ctrl+Shift+E`)
+- Scrollback search with fzf (`Ctrl+Shift+F`)
 
 ### Zsh Enhancements
 - **zsh-autosuggestions** - Fish-like suggestions
@@ -52,7 +51,7 @@ Personal development environment configuration for quick setup on any Linux mach
 ## 🛠️ Quick Install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/dotfiles.git ~/dev/personal/dotfiles
+git clone https://github.com/rohangupta231/dotfiles.git ~/dev/personal/dotfiles
 cd ~/dev/personal/dotfiles
 chmod +x install.sh
 ./install.sh
@@ -72,11 +71,8 @@ sudo apt install -y zsh git curl wget fzf ripgrep eza bat
 # Starship prompt
 curl -sS https://starship.rs/install.sh | sh
 
-# WezTerm
-curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
-echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
-sudo apt update
-sudo apt install -y wezterm
+# kitty
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
 # Stern (Kubernetes log tailing)
 wget https://github.com/stern/stern/releases/download/v1.30.0/stern_1.30.0_linux_amd64.tar.gz -O /tmp/stern.tar.gz
@@ -108,9 +104,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosugges
 # Zsh
 cp ~/dotfiles/zsh/.zshrc ~/.zshrc
 
-# WezTerm
-mkdir -p ~/.config/wezterm
-cp ~/dotfiles/config/wezterm/wezterm.lua ~/.config/wezterm/
+# kitty
+mkdir -p ~/.config/kitty
+cp ~/dotfiles/config/kitty/kitty.conf ~/.config/kitty/
 
 # Starship
 mkdir -p ~/.config
@@ -132,12 +128,9 @@ source ~/.zshrc
 
 ## 🎨 Customization
 
-### WezTerm
-Edit `config/wezterm/wezterm.lua` to customize:
-- Colors and fonts
-- Status bar items
-- Keyboard shortcuts
-- Window appearance
+### kitty
+Edit `config/kitty/kitty.conf` to customize colors, fonts, keyboard shortcuts
+and window appearance. Reload a running kitty with `Ctrl+Shift+F5`.
 
 ### Zsh Aliases
 Edit `zsh/.zshrc` to add your own aliases in the Aliases section.
@@ -185,7 +178,6 @@ git pull
 ```bash
 cd ~/dotfiles
 cp ~/.zshrc zsh/.zshrc
-cp ~/.config/wezterm/wezterm.lua config/wezterm/
 cp ~/.config/starship.toml config/starship/
 git add -A
 git commit -m "Update configs"
@@ -204,10 +196,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosugges
 source ~/.zshrc
 ```
 
-### WezTerm status bar not showing
-- Ensure kubectl is installed if using kube context
-- Check docker is running if using container health
-- Verify git is installed for branch display
+### kitty icons show as boxes
+- Make sure FiraCode Nerd Font is installed: `fc-list | grep -i "FiraCode Nerd"`
+- List fonts kitty can see: `kitty +list-fonts`
 
 ### Permission issues
 ```bash

@@ -115,20 +115,37 @@ else
     print_success "Starship installed"
 fi
 
-# Install WezTerm
-if command_exists wezterm; then
-    print_success "WezTerm already installed"
+# Install kitty (official installer, no sudo needed)
+if command_exists kitty || [ -x ~/.local/kitty.app/bin/kitty ]; then
+    print_success "kitty already installed"
 else
-    print_info "Installing WezTerm..."
+    print_info "Installing kitty..."
     if [ "$PKG_MANAGER" = "apt" ]; then
-        curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
-        echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
-        sudo apt update
-        sudo apt install -y wezterm
+        curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
     else
-        brew install --cask wezterm
+        brew install --cask kitty
     fi
-    print_success "WezTerm installed"
+    print_success "kitty installed"
+fi
+if [ "$PKG_MANAGER" = "apt" ] && [ -d ~/.local/kitty.app ]; then
+    # Put kitty on PATH and in the app launcher
+    mkdir -p ~/.local/bin ~/.local/share/applications
+    ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
+    cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+    sed -i "s|Icon=kitty|Icon=$HOME/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g; s|Exec=kitty|Exec=$HOME/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty.desktop
+fi
+
+# Install FiraCode Nerd Font (used by kitty and starship icons)
+if fc-list | grep -qi "FiraCode Nerd Font"; then
+    print_success "FiraCode Nerd Font already installed"
+elif [ "$PKG_MANAGER" = "apt" ]; then
+    print_info "Installing FiraCode Nerd Font..."
+    mkdir -p ~/.local/share/fonts
+    curl -fsSL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.tar.xz | tar -xJ -C ~/.local/share/fonts --wildcards '*.ttf'
+    fc-cache -f >/dev/null
+    print_success "FiraCode Nerd Font installed"
+else
+    brew install --cask font-fira-code-nerd-font
 fi
 
 # Install Stern (Kubernetes log tailing)
@@ -217,7 +234,7 @@ BACKUP_DIR=~/.dotfiles_backup_$(date +%Y%m%d_%H%M%S)
 mkdir -p "$BACKUP_DIR"
 
 [ -f ~/.zshrc ] && cp ~/.zshrc "$BACKUP_DIR/.zshrc"
-[ -f ~/.config/wezterm/wezterm.lua ] && cp ~/.config/wezterm/wezterm.lua "$BACKUP_DIR/wezterm.lua"
+[ -f ~/.config/kitty/kitty.conf ] && [ ! -L ~/.config/kitty/kitty.conf ] && cp ~/.config/kitty/kitty.conf "$BACKUP_DIR/kitty.conf"
 [ -f ~/.config/starship.toml ] && cp ~/.config/starship.toml "$BACKUP_DIR/starship.toml"
 [ -f ~/.gitconfig ] && cp ~/.gitconfig "$BACKUP_DIR/.gitconfig"
 
@@ -232,9 +249,9 @@ DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dev/personal/dotfiles}"
 cp $DOTFILES_DIR/zsh/.zshrc ~/.zshrc
 print_success "Installed .zshrc"
 
-mkdir -p ~/.config/wezterm
-cp $DOTFILES_DIR/config/wezterm/wezterm.lua ~/.config/wezterm/
-print_success "Installed wezterm.lua"
+mkdir -p ~/.config/kitty
+ln -sfn $DOTFILES_DIR/config/kitty/kitty.conf ~/.config/kitty/kitty.conf
+print_success "Linked kitty.conf"
 
 mkdir -p ~/.config
 if [ -f $DOTFILES_DIR/config/starship/starship.toml ]; then
@@ -273,7 +290,7 @@ echo "========================================="
 echo ""
 print_info "Next steps:"
 echo "  1. Restart your terminal or run: source ~/.zshrc"
-echo "  2. Open WezTerm for the new config"
+echo "  2. Open kitty for the new config"
 echo "  3. Customize configs in ~/dotfiles/"
 echo ""
 print_warning "Note: You may need to log out and back in for shell changes to take effect"
