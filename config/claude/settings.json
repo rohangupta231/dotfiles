@@ -1,0 +1,8 @@
+{
+  "theme": "dark",
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/.local/share/fnm/aliases/default/bin/node $HOME/.local/share/fnm/aliases/default/bin/ccstatusline",
+    "padding": 0
+  }
+}

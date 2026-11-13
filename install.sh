@@ -166,6 +166,22 @@ else
     print_success "fnm installed"
 fi
 
+# Install Node LTS (via fnm) and ccstatusline (Claude Code status line)
+export PATH="$HOME/.local/share/fnm:$PATH"
+eval "$(fnm env)"
+if ! fnm ls | grep -q default; then
+    print_info "Installing Node LTS..."
+    fnm install --lts
+    fnm default "$(fnm current)"
+fi
+if command_exists ccstatusline; then
+    print_success "ccstatusline already installed"
+else
+    print_info "Installing ccstatusline..."
+    npm install -g ccstatusline
+    print_success "ccstatusline installed"
+fi
+
 # Install SDKMAN (Java/Groovy/Gradle/Maven manager)
 if [ -d "$HOME/.sdkman" ]; then
     print_success "SDKMAN already installed"
@@ -230,6 +246,16 @@ if [ -f $DOTFILES_DIR/.gitconfig ]; then
     cp $DOTFILES_DIR/.gitconfig ~/.gitconfig
     print_success "Installed .gitconfig"
 fi
+
+# ccstatusline + Claude Code settings (symlinked so edits land in the repo)
+mkdir -p ~/.config/ccstatusline ~/.claude
+for pair in "config/ccstatusline/settings.json:$HOME/.config/ccstatusline/settings.json" \
+            "config/claude/settings.json:$HOME/.claude/settings.json"; do
+    src="$DOTFILES_DIR/${pair%%:*}"; dst="${pair#*:}"
+    [ -e "$dst" ] && [ ! -L "$dst" ] && cp "$dst" "$BACKUP_DIR/$(basename "$(dirname "$dst")")-settings.json"
+    ln -sfn "$src" "$dst"
+    print_success "Linked $dst"
+done
 
 # Set Zsh as default shell
 if [ "$SHELL" != "$(which zsh)" ]; then
